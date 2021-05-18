@@ -1,6 +1,7 @@
 package com.u2c.pdf;
 
-import cn.cruder.pdf.HeaderFooter;
+import cn.cruder.pdf.Footer;
+import cn.cruder.pdf.Header;
 import cn.cruder.pdf.Watermark;
 import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
@@ -37,7 +38,8 @@ public class PdfReportTest {
             // 设置水印
             writer.setPageEvent(new Watermark("水印"));
             // 设置 页眉/页脚
-            writer.setPageEvent(new HeaderFooter(" 页眉"));
+            writer.setPageEvent(new Header(" 页眉"));
+            writer.setPageEvent(new Footer(" 页脚11"));
 
             // 3.打开文档
             document.open();

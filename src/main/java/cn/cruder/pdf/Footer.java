@@ -10,7 +10,7 @@ import java.io.IOException;
  * @Author dousx
  */
 
-public class HeaderFooter extends PdfPageEventHelper {
+public class Footer extends PdfPageEventHelper {
     /**
      * 总页数
      */
@@ -24,10 +24,10 @@ public class HeaderFooter extends PdfPageEventHelper {
     /**
      * 页眉文本
      */
-    private String headText;
+    private String footText;
 
-    public HeaderFooter(String headText) {
-        this.headText = headText;
+    public Footer(String footText) {
+        this.footText = footText;
     }
 
     {
@@ -68,15 +68,15 @@ public class HeaderFooter extends PdfPageEventHelper {
             table.getDefaultCell().setBorder(Rectangle.BOTTOM);
             // 可以直接使用addCell(str)，不过不能指定字体，中文无法显示
             //table.addCell(new Paragraph("我是页眉/页脚", hfFont));
-            table.addCell(new Paragraph(this.headText, hfFont));
+            table.addCell(new Paragraph(this.footText, hfFont));
             table.getDefaultCell().setHorizontalAlignment(Element.ALIGN_RIGHT);
             table.addCell(new Paragraph("第" + writer.getPageNumber() + "页/", hfFont));
             // 总页数
             PdfPCell cell = new PdfPCell(Image.getInstance(totalPage));
             cell.setBorder(Rectangle.BOTTOM);
             table.addCell(cell);
-            // 将页眉写到document中，位置可以指定，指定到下面就是页脚
-            table.writeSelectedRows(0, -1, 50, PageSize.A4.getHeight() - 20, writer.getDirectContent());
+            // todo 将页眉写到document中，位置可以指定，指定到下面就是页脚
+            table.writeSelectedRows(0, +1, 50, PageSize.A4.getHeight() - 20, writer.getDirectContent());
         } catch (Exception de) {
             throw new ExceptionConverter(de);
         }
